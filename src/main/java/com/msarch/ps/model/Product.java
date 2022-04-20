@@ -1,6 +1,6 @@
 package com.msarch.ps.model;
 
-import io.micrometer.core.lang.NonNull;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,50 +12,21 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private final Long id;
 
-    @NonNull
     @Column(name = "NAME", length = 30, nullable = false)
-    private String name;
+    private final String name;
 
-    @NonNull
     @Column(name = "PRODUCT", length = 100, nullable = false)
-    private String description;
+    private final String description;
 
-    @NonNull
     @Column(name = "VALUE", nullable = false)
-    private BigDecimal value;
+    private final BigDecimal value;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public Product(@NonNull String name, @NonNull String description, @NonNull BigDecimal value) {
+        this.name = Objects.requireNonNull(name);
+        this.description = Objects.requireNonNull(description);
+        this.value = Objects.requireNonNull(value);
     }
 
     @Override
