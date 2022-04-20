@@ -25,4 +25,11 @@ public class ExceptionControllerAdvice {
     public Error methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException methodArgumentTypeMismatchException){
         return new Error(methodArgumentTypeMismatchException);
     }
+
+    @ResponseBody
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Error methodArgumentTypeMismatchException(Exception exception){
+        return new Error(exception);
+    }
 }
