@@ -15,13 +15,17 @@ public class Product {
     private Long id;
 
     @Column(name = "NAME", length = 30, nullable = false)
-    private final String name;
+    private String name;
 
     @Column(name = "PRODUCT", length = 100, nullable = false)
-    private final String description;
+    private String description;
 
     @Column(name = "VALUE", nullable = false)
-    private final BigDecimal value;
+    private BigDecimal value;
+
+    @Deprecated
+    public Product() {
+    }
 
     public Product(@NonNull String name, @NonNull String description, @NonNull BigDecimal value) {
         this.name = Objects.requireNonNull(name);
