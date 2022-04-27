@@ -51,4 +51,13 @@ public class ProductServiceImpl implements ProductService{
         Product product = get(productId);
         productRepository.delete(product);
     }
+
+    @Override
+    public Product update(Long productId, ProductDTO productDTO){
+        Product product = get(productId);
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setValue(productDTO.getValue());
+        return productRepository.update(product);
+    }
 }

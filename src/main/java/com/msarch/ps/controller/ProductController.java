@@ -36,8 +36,14 @@ public class ProductController {
 
     @DeleteMapping("/{product_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void patch(@PathVariable("product_id") Long productId) {
+    public void delete(@PathVariable("product_id") Long productId) {
         productService.delete(productId);
+    }
+
+    @PutMapping("/{product_id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Product updateAll(@PathVariable("product_id") Long productId, @RequestBody ProductDTO productDTO) {
+        return productService.update(productId, productDTO);
     }
 
 }

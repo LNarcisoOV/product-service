@@ -15,4 +15,6 @@ public interface ProductService {
     Product updateByPatch(Product product, JSonPatch jSonPatch) throws JsonPatchException, JsonProcessingException;
 
     void delete(Long productId);
+
+    Product update(Long productId, ProductDTO productDTO);
 }
