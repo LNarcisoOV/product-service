@@ -13,4 +13,6 @@ public interface ProductService {
     Product get(Long id) throws NoResultException;
 
     Product updateByPatch(Product product, JSonPatch jSonPatch) throws JsonPatchException, JsonProcessingException;
+
+    void delete(Long productId);
 }

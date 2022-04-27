@@ -34,4 +34,10 @@ public class ProductController {
         return productService.updateByPatch(product, jSonPatch);
     }
 
+    @DeleteMapping("/{product_id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void patch(@PathVariable("product_id") Long productId) {
+        productService.delete(productId);
+    }
+
 }

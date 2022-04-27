@@ -20,17 +20,17 @@ public class ProductServiceImpl implements ProductService{
     private ProductRepository productRepository;
 
     public Product save(Product product){
-        return productRepository.saveAndFlush(product);
+        return productRepository.save(product);
     }
 
     public Product save(ProductDTO productDTO){
         Product product = new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getValue());
-        return productRepository.saveAndFlush(product);
+        return productRepository.save(product);
     }
 
     @Override
     public Product get(Long productId) {
-        return Optional.of(productRepository.getById(productId)).orElseThrow(() -> new NoResultException(String.format("Product with id %d not found.", productId)));
+        return Optional.of(productRepository.findById(productId)).orElseThrow(() -> new NoResultException(String.format("Product with id %d not found.", productId)));
     }
 
     @Override
@@ -44,5 +44,11 @@ public class ProductServiceImpl implements ProductService{
         JSonNode jsonNode = jSonPatch.apply(jsonNodeProduct);
         Product productUpdate = objectMapper.treeToValue(patchJsonNode, Product.class);
         return save(productUpdate);
+    }
+
+    @Override
+    public void delete(Long productId) {
+        Product product = get(productId);
+        productRepository.delete(product);
     }
 }
