@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @PutMapping("/{product_id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public Product updateAll(@PathVariable("product_id") Long productId, @RequestBody ProductDTO productDTO) {
         return productService.update(productId, productDTO);
     }
