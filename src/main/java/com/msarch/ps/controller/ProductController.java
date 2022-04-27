@@ -1,5 +1,8 @@
 package com.msarch.ps.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.msarch.ps.model.Product;
 import com.msarch.ps.model.dto.ProductDTO;
 import com.msarch.ps.service.ProductService;
@@ -15,7 +18,7 @@ public class ProductController {
 
     @PostMapping("/")
     public ResponseEntity<Product> insert(@Valid @RequestBody ProductDTO productDTO){
-        Product product = productService.insert(productDTO);
+        Product product = productService.save(productDTO);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
@@ -24,4 +27,11 @@ public class ProductController {
     public Product get(@PathVariable Long productId){
         return productService.get(productId);
     }
+
+    @PatchMapping("/{product_id}")
+    public Product patch(@PathVariable("product_id") Long productId, @RequestBody JSonPatch jSonPatch) throws JsonPatchException, JsonProcessingException {
+        Product product = productService.get(productId);
+        return productService.updateByPatch(product, jSonPatch);
+    }
+
 }
